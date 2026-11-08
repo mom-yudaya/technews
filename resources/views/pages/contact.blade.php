@@ -1,17 +1,80 @@
+@extends("layouts.app")
 
-landing.blade.php
-100%
-<!DOCTYPE html>
-<html lang="en">
+@section('content')
+    <main>
+        <div class="wrap page-hero">
+            <p class="eyebrow">Contact</p>
+            <h1>We’d love to hear from you.</h1>
+            <p>Have a question, a story tip or an idea? Send us a message and we will reply within two working days.</p>
+        </div>
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>TechNews – Tech news in five minutes</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Public+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet">
+        <div class="wrap contact">
+            <div class="card">
+                <form id="contactForm" novalidate>
+                    <div class="two">
+                        <div class="field"><label for="name">Your name</label><input id="name" name="name"
+                                autocomplete="name"><span class="hint"></span></div>
+                        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email"
+                                autocomplete="email" placeholder="you@example.com"><span class="hint"></span></div>
+                    </div>
+                    <div class="field">
+                        <label for="topic">Topic</label>
+                        <select id="topic" name="topic">
+                            <option>General question</option>
+                            <option>Story tip</option>
+                            <option>Advertising or partnership</option>
+                            <option>Report a problem</option>
+                        </select>
+                        <span class="hint"></span>
+                    </div>
+                    <div class="field"><label for="message">Message</label><textarea id="message"
+                            name="message"></textarea><span class="hint"></span></div>
+                    <button class="btn" type="submit">Send message</button>
+                    <p class="note" id="formNote" aria-live="polite"></p>
+                </form>
+            </div>
+
+            <aside class="info" aria-label="Contact details">
+                <div class="item"><small>Email</small><b>hello@technews.com</b>
+                    <p>For questions and story tips</p>
+                </div>
+                <div class="item"><small>Phone</small><b>+000 00 000 000</b>
+                    <p>Monday to Friday, 9:00 – 17:00</p>
+                </div>
+                <div class="item"><small>Address</small><b>Your Street, Your City</b>
+                    <p>Your Country</p>
+                </div>
+            </aside>
+        </div>
+
+        <section class="why">
+            <div class="wrap">
+                <div class="head">
+                    <h2>Common questions</h2>
+                </div>
+                <div class="faq">
+                    <details>
+                        <summary>Is TechNews free?</summary>
+                        <p>Yes. Reading the website and receiving the daily email are both free.</p>
+                    </details>
+                    <details>
+                        <summary>How do I unsubscribe from the email?</summary>
+                        <p>Every email has an unsubscribe link at the bottom. One click is enough.</p>
+                    </details>
+                    <details>
+                        <summary>Can I send you a story to cover?</summary>
+                        <p>Of course. Choose “Story tip” in the form above and include a link.</p>
+                    </details>
+                    <details>
+                        <summary>How fast do you reply?</summary>
+                        <p>Usually within two working days.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+<!-- style's contact -->
     <style>
         :root {
             --bg: #ffffff;
@@ -448,129 +511,181 @@ landing.blade.php
                 }
             }
         }
-    </style>
-</head>
 
-<body>
-
-    <!-- <header>
-        <div class="wrap bar">
-            <a href="index.html" class="logo" aria-label="TechNews home">Tech<span>News</span></a>
-            <nav aria-label="Main">
-                <a href="index.html#latest">Latest</a>
-                <a href="about.html" aria-current="page" style="color:var(--ink)">About</a>
-                <a href="index.html#subscribe" class="btn">Subscribe</a>
-            </nav>
-        </div>
-    </header> -->
-
-    <x-header></x-header>
-
-    <main id="top">
-        <div class="wrap hero">
-            <div>
-                <h1>The tech news that matters, in five minutes.</h1>
-                <p class="lead">We gather stories from trusted sources every day, cut the noise, and give you a short,
-                    clear summary of each one.</p>
-                <form class="sub" data-sub novalidate>
-                    <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
-                    <button class="btn" type="submit">Get the daily digest</button>
-                </form>
-                <p class="note" data-note aria-live="polite">Free. One email a day. Unsubscribe anytime.</p>
-            </div>
-
-            <x-aside> </x-aside>
-
-        </div>
-
-        <section id="latest" class="wrap">
-            <div class="head">
-                <h2>Latest stories</h2>
-                <div class="chips" role="group" aria-label="Filter by topic" id="chips"></div>
-            </div>
-            <div class="grid" id="grid"></div>
-        </section>
-
-        <section id="why" class="why">
-            <div class="wrap cols">
-                <div>
-                    <h3>Short by design</h3>
-                    <p>Every story is summarised in a few lines. You get the point first, then choose whether to read
-                        more.</p>
-                </div>
-                <div>
-                    <h3>Updated automatically</h3>
-                    <p>New articles arrive from trusted feeds throughout the day, so the page is never out of date.</p>
-                </div>
-                <div>
-                    <h3>Easy to read anywhere</h3>
-                    <p>Clean white pages with large text that load fast on a phone, a laptop, or a slow connection.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="subscribe" class="cta wrap">
-            <h2>Start your morning with one email</h2>
-            <p>Join readers who catch up on technology before their first coffee.</p>
-            <form class="sub" data-sub novalidate>
-                <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" required>
-                <button class="btn" type="submit">Subscribe</button>
-            </form>
-            <p class="note" data-note aria-live="polite"></p>
-        </section>
-    </main>
-
-    <footer>
-        <div class="wrap">
-            <span>© <span id="yr">2026</span> TechNews. All rights reserved.</span>
-            <nav aria-label="Footer"><a href="#latest">Latest</a><a href="about.html">About</a><a
-                    href="#subscribe">Subscribe</a></nav>
-        </div>
-    </footer>
-
-    <script>
-        // Sample stories – replace with your own posts or load them from your backend.
-        var POSTS = [
-            { t: "AI", h: "Open-source models are catching up fast", p: "Free models now handle many tasks that needed paid tools a year ago.", m: "4 min read", c: "#dbe4ff" },
-            { t: "Web", h: "Browsers get smarter about tracking", p: "New built-in controls make it easier to keep your browsing private.", m: "3 min read", c: "#d9f2e6" },
-            { t: "Security", h: "Password managers explained simply", p: "What they do, why they are safer, and how to switch in ten minutes.", m: "5 min read", c: "#ffe3dc" },
-            { t: "Gadgets", h: "Choosing a laptop for coding in 2026", p: "RAM, battery life, and screen: the three specs that matter most.", m: "6 min read", c: "#fff1cc" },
-            { t: "AI", h: "How to use AI tools without losing your skills", p: "Practical habits for students and developers who use AI every day.", m: "4 min read", c: "#e6dcff" },
-            { t: "Web", h: "Why fast websites win more readers", p: "A few small changes to images and fonts can cut load time in half.", m: "3 min read", c: "#d6f0f7" }
-        ];
-        var TOPICS = ["All", "AI", "Web", "Security", "Gadgets"];
-        var grid = document.getElementById("grid"), chips = document.getElementById("chips");
-
-        function render(topic) {
-            var list = POSTS.filter(function (p) { return topic === "All" || p.t === topic; });
-            grid.innerHTML = list.length ? list.map(function (p) {
-                return '<a class="post" href="/blog"><div class="thumb" style="background:'+p.c+'"></div><div class="in">'+
-  '<span class="tag">'+p.t+'</span><h3>'+p.h+'</h3><p>'+p.p+'</p><span class="meta">'+p.m+'</span></div></a>';
-            }).join("") : '<p class="empty">No stories in this topic yet.</p>';
+        /* Contact page */
+        .page-hero {
+            padding: 88px 0 48px;
+            max-width: 760px
         }
-        TOPICS.forEach(function (t, i) {
-            var b = document.createElement("button");
-            b.className = "chip"; b.textContent = t; b.setAttribute("aria-pressed", i === 0);
-            b.addEventListener("click", function () {
-                chips.querySelectorAll(".chip").forEach(function (c) { c.setAttribute("aria-pressed", c === b); });
-                render(t);
-            });
-            chips.appendChild(b);
-        });
-        render("All");
 
-        // Subscribe forms: simple email check (connect to your mail service or Laravel route later)
-        document.querySelectorAll("[data-sub]").forEach(function (f) {
-            f.addEventListener("submit", function (e) {
-                e.preventDefault();
-                var note = f.parentNode.querySelector("[data-note]"), v = f.email.value.trim();
-                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { note.className = "note err"; note.textContent = "Enter a valid email address, like you@example.com."; return; }
-                note.className = "note ok"; note.textContent = "You’re subscribed. Check your inbox tomorrow morning."; f.reset();
-            });
-        });
-        document.getElementById("yr").textContent = new Date().getFullYear();
-    </script>
-</body>
+        .page-hero h1 {
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 800
+        }
 
-</html>
+        .page-hero p {
+            font-size: 19px;
+            color: var(--muted);
+            margin: 22px 0 0
+        }
+
+        .eyebrow {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 0 0 14px
+        }
+
+        .contact {
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 48px;
+            padding-bottom: 72px;
+            align-items: start
+        }
+
+        .card {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 32px;
+            background: var(--bg)
+        }
+
+        .field {
+            margin-bottom: 20px
+        }
+
+        .field label {
+            display: block;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 6px
+        }
+
+        .field input,
+        .field select,
+        .field textarea {
+            width: 100%;
+            font: 400 16px var(--body);
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--ink)
+        }
+
+        .field textarea {
+            min-height: 140px;
+            resize: vertical
+        }
+
+        .field.bad input,
+        .field.bad select,
+        .field.bad textarea {
+            border-color: #c23a3a
+        }
+
+        .hint {
+            display: block;
+            min-height: 1.4em;
+            font-size: 13px;
+            color: #c23a3a;
+            margin-top: 4px
+        }
+
+        .two {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        .info {
+            display: grid;
+            gap: 16px
+        }
+
+        .info .item {
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 20px;
+            background: var(--surface)
+        }
+
+        .info small {
+            display: block;
+            color: var(--muted);
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 4px
+        }
+
+        .info b {
+            font: 700 18px var(--head);
+            word-break: break-word
+        }
+
+        .info p {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .faq {
+            max-width: 760px
+        }
+
+        .faq details {
+            border-top: 1px solid var(--line);
+            padding: 18px 0
+        }
+
+        .faq details:last-child {
+            border-bottom: 1px solid var(--line)
+        }
+
+        .faq summary {
+            cursor: pointer;
+            font: 700 18px var(--head);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            gap: 16px
+        }
+
+        .faq summary::after {
+            content: "+";
+            color: var(--accent);
+            font-size: 24px;
+            line-height: 1
+        }
+
+        .faq details[open] summary::after {
+            content: "–"
+        }
+
+        .faq details p {
+            margin: 10px 0 0;
+            color: var(--muted)
+        }
+
+        @media (max-width:860px) {
+            .contact {
+                grid-template-columns: 1fr
+            }
+
+            .two {
+                grid-template-columns: 1fr
+            }
+
+            .page-hero {
+                padding-top: 56px
+            }
+
+            .card {
+                padding: 22px
+            }
+        }
+    </style>
+
+@endsection
 
